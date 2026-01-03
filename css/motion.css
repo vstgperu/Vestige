@@ -1,0 +1,14 @@
+.bg-motion{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,158,203,.15),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(255,255,255,.05),transparent 45%);
+  animation:bgMove 20s ease-in-out infinite alternate;
+  z-index:-1;
+}
+
+@keyframes bgMove{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
+}
