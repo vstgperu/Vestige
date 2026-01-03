@@ -1,0 +1,54 @@
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 70px;
+  z-index:100;
+}
+
+.logo{
+  font-weight:800;
+  letter-spacing:6px;
+}
+
+.menu{
+  display:flex;
+  gap:60px;
+  list-style:none;
+}
+
+.menu li{
+  cursor:pointer;
+  letter-spacing:3px;
+  opacity:.6;
+  transition:.6s;
+}
+
+.menu li:hover{
+  opacity:1;
+  transform:translateY(-3px);
+}
+
+.toggle{
+  width:44px;height:44px;
+  border-radius:50%;
+  border:1px solid var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.toggle span{
+  width:18px;height:18px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#fff,#000);
+  animation:spin 6s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
