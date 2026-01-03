@@ -2,60 +2,42 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Vestige — Archivo</title>
+  <title>VESTIGE — Exhibición</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/nav.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/relic.css">
-  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
-  <div class="bg-motion"></div>
+<body class="theme-dark">
 
-  <nav>
-    <div class="logo">VESTIGE</div>
-    <ul class="menu">
-      <li data-scroll="hero">INICIO</li>
-      <li data-scroll="relic">PRENDAS</li>
-    </ul>
-    <div class="toggle" id="themeToggle">
-      <span></span>
-    </div>
-  </nav>
+<div id="background"></div>
 
-  <header id="hero">
-    <h1>VESTIGE</h1>
-    <p>ARCHIVO · OBJETO · RELIQUIA</p>
-  </header>
+<div id="intro">
+  <h1>VESTIGE</h1>
+</div>
 
-  <section id="relic">
+<nav>
+  <div class="menu">
+    <div data-section="inicio">Inicio</div>
+    <div data-section="prendas">Prendas</div>
+  </div>
+  <div id="themeToggle">☯</div>
+</nav>
+
+<div id="app">
+
+  <section id="inicio" class="section active">
+    <h2>Vestige</h2>
+    <p>Una sola pieza. Una reliquia. No se vende, se contempla.</p>
+  </section>
+
+  <section id="prendas" class="section">
     <div class="relic">
-      <img src="assets/conjunto.png" alt="Vestige Signature Pink">
-      <div class="relic-text">
-        <h2>Signature Pink</h2>
-        <p>
-          Esta pieza no pertenece al comercio.<br>
-          No responde a temporadas.<br>
-          Existe como vestigio de identidad.
-        </p>
-        <div class="badge">PIEZA ÚNICA</div>
-      </div>
+      <img src="conjunto1.png" alt="Conjunto 1">
     </div>
   </section>
 
-  <footer>
-    © Vestige — Archivo permanente
-  </footer>
+</div>
 
-  <script src="js/engine.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/particles.js"></script>
-  <script src="js/interactions.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
