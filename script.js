@@ -1,27 +1,13 @@
 // =============================================
-// CONFIGURACIÓN Y VARIABLES GLOBALES
+// THREE.JS - ANIMACIÓN DE ENTRADA
 // =============================================
 
-// Credenciales válidas (sin mostrar en frontend)
-const VALID_USERS = {
-    'fabricio': 'fabriciolobo1',
-    'chocolatito': 'xgustavoelcrackx'
-};
-
-// Elementos del DOM
 let scene, camera, renderer, textMeshV, textMeshG;
 let currentPhase = 0;
 let startTime;
 let animationId;
-let currentUser = null;
-
-// =============================================
-// THREE.JS - ANIMACIÓN DE ENTRADA (FASE 1)
-// =============================================
 
 function initThreeJS() {
-    console.log("Iniciando Three.js...");
-    
     // 1. Escena
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
@@ -58,10 +44,6 @@ function setupLights() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(10, 20, 15);
     scene.add(directionalLight);
-    
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    fillLight.position.set(-10, -10, -5);
-    scene.add(fillLight);
 }
 
 function loadFont() {
@@ -235,7 +217,7 @@ function animate() {
                 textMeshG.material.transparent = true;
                 
                 if (t2 >= 1) {
-                    setTimeout(showLoginPhase, 1000);
+                    setTimeout(showDashboard, 1000);
                 }
                 break;
         }
@@ -244,7 +226,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-function showLoginPhase() {
+function showDashboard() {
     if (animationId) cancelAnimationFrame(animationId);
     
     if (scene && textMeshV && textMeshG) {
@@ -254,101 +236,17 @@ function showLoginPhase() {
     
     document.getElementById('phase1').classList.remove('active');
     document.getElementById('phase2').classList.add('active');
+    
+    // Cargar imagen del conjunto
+    loadSetImage();
 }
 
 // =============================================
-// SISTEMA DE LOGIN (FASE 2)
+// SISTEMA DE NAVEGACIÓN Y CATÁLOGO
 // =============================================
 
-function setupLogin() {
-    const loginForm = document.getElementById('loginForm');
-    const errorMessage = document.getElementById('errorMessage');
-    const loginBtn = loginForm.querySelector('.login-btn');
-    const btnLoader = loginBtn.querySelector('.btn-loader');
-    const btnText = loginBtn.querySelector('.btn-text');
-    
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value;
-        
-        // Mostrar loading
-        btnText.style.opacity = '0.5';
-        btnLoader.style.opacity = '1';
-        loginBtn.disabled = true;
-        
-        setTimeout(() => {
-            if (VALID_USERS[username] && VALID_USERS[username] === password) {
-                currentUser = username;
-                loginSuccess(username);
-            } else {
-                showError('Acceso denegado. Verifica tus credenciales.');
-            }
-            
-            btnText.style.opacity = '1';
-            btnLoader.style.opacity = '0';
-            loginBtn.disabled = false;
-        }, 1000);
-    });
-    
-    ['username', 'password'].forEach(id => {
-        document.getElementById(id).addEventListener('input', () => {
-            errorMessage.style.display = 'none';
-        });
-    });
-}
-
-function showError(message) {
-    const errorMessage = document.getElementById('errorMessage');
-    errorMessage.textContent = message;
-    errorMessage.style.display = 'block';
-    
-    errorMessage.style.animation = 'none';
-    void errorMessage.offsetWidth;
-    errorMessage.style.animation = 'shake 0.5s';
-}
-
-function loginSuccess(username) {
-    document.getElementById('phase2').classList.remove('active');
-    document.getElementById('phase3').classList.add('active');
-    
-    setupDashboard(username);
-    loadClothesImage(); // Cargar imagen de la prenda
-}
-
-// =============================================
-// DASHBOARD Y SECCIÓN DE PRENDAS (FASE 3)
-// =============================================
-
-function setupDashboard(username) {
-    document.getElementById('userWelcome').textContent = `Bienvenido, ${username}`;
-    document.getElementById('profileUsername').textContent = username;
-    document.getElementById('avatarInitials').textContent = username.charAt(0).toUpperCase();
-    
-    updateLastAccess();
-    setupMenu();
-    setupControls();
-}
-
-function updateLastAccess() {
-    const now = new Date();
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    const formattedDate = now.toLocaleDateString('es-ES', options);
-    
-    document.getElementById('lastAccess').textContent = formattedDate;
-    document.getElementById('profileLastAccess').textContent = formattedDate;
-}
-
-function setupMenu() {
-    const menuItems = document.querySelectorAll('.menu-item:not(.logout)');
+function setupNavigation() {
+    const menuItems = document.querySelectorAll('.menu-item');
     const sections = document.querySelectorAll('.content-section');
     
     menuItems.forEach(item => {
@@ -361,25 +259,23 @@ function setupMenu() {
             this.classList.add('active');
             const sectionId = this.getAttribute('data-section') + 'Section';
             document.getElementById(sectionId).classList.add('active');
-            
-            // Si es la sección de prendas, actualizar efectos
-            if (sectionId === 'clothesSection') {
-                updateClothesEffects();
-            }
         });
     });
 }
 
-// CARGAR IMAGEN DE LA PRENDA
-function loadClothesImage() {
-    const clothesImageContainer = document.getElementById('clothesImage');
+// CARGAR IMAGEN DEL CONJUNTO
+function loadSetImage() {
+    const setImageContainer = document.getElementById('set1Image');
     
-    // Crear elemento de imagen
     const img = document.createElement('img');
-    img.src = 'conjunto1.png'; // Nombre del archivo de imagen
+    img.src = 'conjunto1.png';
     img.alt = 'Conjunto Vestige #1';
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '100%';
+    img.style.objectFit = 'contain';
+    
     img.onload = function() {
-        console.log('Imagen de prenda cargada correctamente');
+        console.log('Imagen conjunto1.png cargada correctamente');
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.5s ease';
         
@@ -391,7 +287,6 @@ function loadClothesImage() {
     img.onerror = function() {
         console.warn('No se pudo cargar conjunto1.png, usando placeholder');
         
-        // Crear placeholder artístico
         const placeholder = document.createElement('div');
         placeholder.style.width = '100%';
         placeholder.style.height = '100%';
@@ -401,7 +296,6 @@ function loadClothesImage() {
         placeholder.style.justifyContent = 'center';
         placeholder.style.color = 'rgba(255, 255, 255, 0.3)';
         placeholder.style.textAlign = 'center';
-        placeholder.style.padding = '20px';
         
         const icon = document.createElement('div');
         icon.innerHTML = `
@@ -413,95 +307,51 @@ function loadClothesImage() {
         const text = document.createElement('div');
         text.innerHTML = `
             <div style="font-size: 18px; margin-bottom: 10px; color: rgba(255, 255, 255, 0.5);">Conjunto #1</div>
-            <div style="font-size: 14px; color: rgba(255, 255, 255, 0.3);">Vestige Collection</div>
+            <div style="font-size: 14px; color: rgba(255, 255, 255, 0.3);">Imagen no disponible</div>
         `;
         
         placeholder.appendChild(icon);
         placeholder.appendChild(text);
-        clothesImageContainer.appendChild(placeholder);
+        setImageContainer.appendChild(placeholder);
     };
     
-    clothesImageContainer.appendChild(img);
+    setImageContainer.appendChild(img);
 }
 
-// ACTUALIZAR EFECTOS DE LA SECCIÓN PRENDAS
-function updateClothesEffects() {
-    const effects = document.querySelectorAll('.effect');
-    effects.forEach((effect, index) => {
-        effect.style.animation = 'none';
-        void effect.offsetWidth;
-        effect.style.animation = `effectFloat 8s ease-in-out infinite ${index * 2}s`;
-    });
+// CARGAR IMAGEN DE FONDO
+function loadBackgroundImage() {
+    const bg = document.getElementById('modelBackground');
+    const img = new Image();
     
-    const card = document.querySelector('.clothes-card-3d');
-    if (card) {
-        card.style.animation = 'none';
-        void card.offsetWidth;
-        card.style.animation = 'cardFloat 6s ease-in-out infinite';
-    }
-}
-
-function setupControls() {
-    document.getElementById('logoutBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-            logout();
-        }
-    });
+    img.src = 'modelo1.png';
+    img.onload = function() {
+        console.log('Fondo modelo1.png cargado correctamente');
+        bg.style.backgroundImage = `url('${img.src}')`;
+    };
     
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const notificationsToggle = document.getElementById('notificationsToggle');
-    const animationsToggle = document.getElementById('animationsToggle');
-    
-    darkModeToggle.addEventListener('change', function() {
-        document.body.classList.toggle('dark-mode', this.checked);
-        localStorage.setItem('darkMode', this.checked);
-    });
-    
-    notificationsToggle.addEventListener('change', function() {
-        localStorage.setItem('notifications', this.checked);
-    });
-    
-    animationsToggle.addEventListener('change', function() {
-        localStorage.setItem('animations', this.checked);
-    });
-    
-    loadPreferences();
-}
-
-function loadPreferences() {
-    const darkMode = localStorage.getItem('darkMode') !== 'false';
-    const notifications = localStorage.getItem('notifications') !== 'false';
-    const animations = localStorage.getItem('animations') !== 'false';
-    
-    document.getElementById('darkModeToggle').checked = darkMode;
-    document.getElementById('notificationsToggle').checked = notifications;
-    document.getElementById('animationsToggle').checked = animations;
-    
-    if (darkMode) {
-        document.body.classList.add('dark-mode');
-    }
-}
-
-function logout() {
-    document.getElementById('phase3').classList.remove('active');
-    document.getElementById('loginForm').reset();
-    document.getElementById('errorMessage').style.display = 'none';
-    document.getElementById('phase2').classList.add('active');
-    currentUser = null;
+    img.onerror = function() {
+        console.warn('No se pudo cargar modelo1.png, usando fondo alternativo');
+        bg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
+    };
 }
 
 // =============================================
-// INICIALIZACIÓN DE LA APLICACIÓN
+// INICIALIZACIÓN
 // =============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Sistema Vestige iniciando...');
+    console.log('Vestige Catálogo iniciando...');
     
+    // Cargar imágenes primero
+    loadBackgroundImage();
+    
+    // Iniciar animación 3D
     initThreeJS();
-    setupLogin();
     
+    // Configurar navegación
+    setupNavigation();
+    
+    // Redimensionamiento
     window.addEventListener('resize', onWindowResize);
 });
 
@@ -511,28 +361,4 @@ function onWindowResize() {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
-}
-
-// CSS adicional
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
-    }
-    
-    .dark-mode {
-        --bg-color: #0a0a0f;
-        --card-bg: rgba(255, 255, 255, 0.03);
-    }
-    
-    /* Estilos para la imagen de prenda */
-    #clothesImage img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-`;
-document.head.appendChild(style);
+                                                            }
