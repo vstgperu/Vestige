@@ -5,27 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vestige - Catálogo Exclusivo</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ESTILO TEMPORAL PARA VERIFICAR */
+        .debug {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Debug info -->
+    <div class="debug" id="debugInfo">Cargando...</div>
+    
     <!-- Fase 1: Animación 3D de entrada -->
     <div id="phase1" class="phase active">
         <div id="container3d"></div>
         <div class="phase-info">𝓥𝓮𝓼𝓽𝓲𝓰𝓮</div>
     </div>
 
-    <!-- Fase 2: Dashboard con fondos por sección -->
+    <!-- Fase 2: Dashboard -->
     <div id="phase2" class="phase">
-        <!-- Fondos por sección -->
-        <div class="section-background active" id="homeBackground">
-            <div class="background-overlay"></div>
-        </div>
-        <div class="section-background" id="setsBackground">
-            <div class="background-overlay"></div>
-        </div>
-        <div class="section-background" id="shirtsBackground">
-            <div class="background-overlay"></div>
-        </div>
-        <div class="section-background" id="pantsBackground">
+        <!-- SOLO UN FONDO PARA INICIO -->
+        <div class="model-background" id="modelBackground">
             <div class="background-overlay"></div>
         </div>
 
