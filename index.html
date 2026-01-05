@@ -7,17 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fondo con modelo -->
-    <div class="model-background" id="modelBackground"></div>
-    
-    <!-- Fase 1: Animación 3D de entrada (sin login) -->
+    <!-- Fase 1: Animación 3D de entrada -->
     <div id="phase1" class="phase active">
         <div id="container3d"></div>
         <div class="phase-info">𝓥𝓮𝓼𝓽𝓲𝓰𝓮</div>
     </div>
 
-    <!-- Fase 2: Dashboard simplificado -->
+    <!-- Fase 2: Dashboard con fondos por sección -->
     <div id="phase2" class="phase">
+        <!-- Fondos por sección -->
+        <div class="section-background active" id="homeBackground">
+            <div class="background-overlay"></div>
+        </div>
+        <div class="section-background" id="setsBackground">
+            <div class="background-overlay"></div>
+        </div>
+        <div class="section-background" id="shirtsBackground">
+            <div class="background-overlay"></div>
+        </div>
+        <div class="section-background" id="pantsBackground">
+            <div class="background-overlay"></div>
+        </div>
+
         <div class="dashboard">
             <!-- Sidebar transparente -->
             <div class="sidebar">
@@ -38,7 +49,6 @@
                     
                     <a href="#" class="menu-item" data-section="sets">
                         <svg class="menu-icon" viewBox="0 0 24 24">
-                            <!-- SVG de conjunto -->
                             <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
                         </svg>
                         <span>Conjuntos</span>
@@ -46,7 +56,6 @@
                     
                     <a href="#" class="menu-item" data-section="shirts">
                         <svg class="menu-icon" viewBox="0 0 24 24">
-                            <!-- SVG de polera -->
                             <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
                             <circle cx="7" cy="7" r="2"/>
                             <circle cx="17" cy="7" r="2"/>
@@ -56,7 +65,6 @@
                     
                     <a href="#" class="menu-item" data-section="pants">
                         <svg class="menu-icon" viewBox="0 0 24 24">
-                            <!-- SVG de pantalón -->
                             <path d="M10 2c-1.1 0-2 .9-2 2v5h2V4h4v5h2V4c0-1.1-.9-2-2-2h-4zm-2 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H8zm0 2h8v10H8V12z"/>
                         </svg>
                         <span>Pantalones</span>
@@ -121,7 +129,6 @@
                             </div>
                         </div>
                         
-                        <!-- Más conjuntos pueden agregarse aquí -->
                         <div class="product-card coming-soon">
                             <div class="coming-soon-overlay">
                                 <span>Próximamente</span>
@@ -242,4 +249,4 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
     <script src="script.js"></script>
 </body>
-                                            </html>
+</html>
