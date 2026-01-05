@@ -237,28 +237,53 @@ function showDashboard() {
     document.getElementById('phase1').classList.remove('active');
     document.getElementById('phase2').classList.add('active');
     
-    // Cargar imagen del conjunto
+    // Cargar imágenes
+    loadBackgroundImages();
     loadSetImage();
 }
 
 // =============================================
-// SISTEMA DE NAVEGACIÓN Y CATÁLOGO
+// SISTEMA DE FONDOS Y NAVEGACIÓN
 // =============================================
+
+function loadBackgroundImages() {
+    // Cargar imagen de fondo para inicio
+    const homeBg = document.getElementById('homeBackground');
+    const img = new Image();
+    
+    img.src = 'modelo1.png';
+    img.onload = function() {
+        console.log('Fondo modelo1.png cargado correctamente');
+        homeBg.style.backgroundImage = `url('${img.src}')`;
+    };
+    
+    img.onerror = function() {
+        console.warn('No se pudo cargar modelo1.png, usando fondo alternativo');
+        homeBg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
+    };
+}
 
 function setupNavigation() {
     const menuItems = document.querySelectorAll('.menu-item');
     const sections = document.querySelectorAll('.content-section');
+    const backgrounds = document.querySelectorAll('.section-background');
     
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             
+            // Remover activo de todo
             menuItems.forEach(i => i.classList.remove('active'));
             sections.forEach(s => s.classList.remove('active'));
+            backgrounds.forEach(b => b.classList.remove('active'));
             
+            // Agregar activo al clickeado
             this.classList.add('active');
             const sectionId = this.getAttribute('data-section') + 'Section';
+            const backgroundId = this.getAttribute('data-section') + 'Background';
+            
             document.getElementById(sectionId).classList.add('active');
+            document.getElementById(backgroundId).classList.add('active');
         });
     });
 }
@@ -318,32 +343,12 @@ function loadSetImage() {
     setImageContainer.appendChild(img);
 }
 
-// CARGAR IMAGEN DE FONDO
-function loadBackgroundImage() {
-    const bg = document.getElementById('modelBackground');
-    const img = new Image();
-    
-    img.src = 'modelo1.png';
-    img.onload = function() {
-        console.log('Fondo modelo1.png cargado correctamente');
-        bg.style.backgroundImage = `url('${img.src}')`;
-    };
-    
-    img.onerror = function() {
-        console.warn('No se pudo cargar modelo1.png, usando fondo alternativo');
-        bg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
-    };
-}
-
 // =============================================
 // INICIALIZACIÓN
 // =============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Vestige Catálogo iniciando...');
-    
-    // Cargar imágenes primero
-    loadBackgroundImage();
     
     // Iniciar animación 3D
     initThreeJS();
@@ -361,4 +366,4 @@ function onWindowResize() {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
-                                                            }
+}
