@@ -6,11 +6,8 @@ let scene, camera, renderer, textMeshV, textMeshG;
 let currentPhase = 0;
 let startTime;
 let animationId;
-const debugInfo = document.getElementById('debugInfo');
 
 function initThreeJS() {
-    debugInfo.textContent = "Iniciando animación 3D...";
-    
     // 1. Escena
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
@@ -33,7 +30,7 @@ function initThreeJS() {
     // 4. Luces
     setupLights();
     
-    // 5. Cargar fuente
+    // 5. Cargar fuente y crear texto
     loadFont();
     
     // 6. Iniciar animación
@@ -55,14 +52,12 @@ function loadFont() {
     loader.load(
         'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
         function(font) {
-            debugInfo.textContent = "Creando texto 3D...";
             createText3D(font);
         },
         function(xhr) {
-            debugInfo.textContent = `Cargando fuente: ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+            console.log('Cargando fuente: ' + (xhr.loaded / xhr.total * 100) + '%');
         },
         function(error) {
-            debugInfo.textContent = "Error cargando fuente, usando alternativa";
             console.error('Error cargando fuente:', error);
             createFallbackText();
         }
@@ -112,8 +107,6 @@ function createText3D(font) {
     
     scene.add(textMeshV);
     scene.add(textMeshG);
-    
-    debugInfo.textContent = "Texto 3D creado, iniciando animación...";
 }
 
 function createFallbackText() {
@@ -185,8 +178,6 @@ function animate() {
                 textMeshG.position.y = THREE.MathUtils.lerp(20, 0, t1);
                 textMeshG.rotation.y = -t1 * Math.PI * 2;
                 
-                debugInfo.textContent = `Animación: Entrada ${Math.round(t1 * 100)}%`;
-                
                 if (t1 >= 1) {
                     currentPhase = 1;
                     startTime = Date.now();
@@ -205,8 +196,6 @@ function animate() {
                 camera.position.x = Math.sin(Date.now() * 0.0005) * 20;
                 camera.position.z = 40 + Math.cos(Date.now() * 0.0005) * 5;
                 camera.lookAt(0, 0, 0);
-                
-                debugInfo.textContent = `Animación: Giro ${Math.round(elapsed / 4000 * 100)}%`;
                 
                 if (elapsed >= 4000) {
                     currentPhase = 2;
@@ -227,8 +216,6 @@ function animate() {
                 textMeshG.material.opacity = 1 - t2;
                 textMeshG.material.transparent = true;
                 
-                debugInfo.textContent = `Animación: Salida ${Math.round(t2 * 100)}%`;
-                
                 if (t2 >= 1) {
                     setTimeout(showDashboard, 1000);
                 }
@@ -240,8 +227,6 @@ function animate() {
 }
 
 function showDashboard() {
-    debugInfo.textContent = "Mostrando catálogo...";
-    
     if (animationId) cancelAnimationFrame(animationId);
     
     if (scene && textMeshV && textMeshG) {
@@ -252,61 +237,36 @@ function showDashboard() {
     document.getElementById('phase1').classList.remove('active');
     document.getElementById('phase2').classList.add('active');
     
-    // Cargar imágenes
-    loadModelBackground();
+    // Activar fondo global
+    activateGlobalBackground();
+    
+    // Cargar imagen del conjunto
     loadSetImage();
-    
-    // Configurar navegación
-    setupNavigation();
-    
-    // Ocultar debug después de 3 segundos
-    setTimeout(() => {
-        debugInfo.style.opacity = '0';
-        setTimeout(() => {
-            debugInfo.style.display = 'none';
-        }, 1000);
-    }, 3000);
 }
 
 // =============================================
-// CARGAR FONDO DEL MODELO
+// SISTEMA DE FONDOS Y NAVEGACIÓN
 // =============================================
 
-function loadModelBackground() {
-    debugInfo.textContent = "Cargando fondo modelo1.png...";
+function activateGlobalBackground() {
+    const globalBg = document.getElementById('globalBackground');
     
-    const modelBg = document.querySelector('.model-background');
-    
-    // Crear imagen
+    // Verificar si la imagen existe
     const img = new Image();
+    img.src = 'modelo1.png';
     
     img.onload = function() {
-        debugInfo.textContent = "Fondo modelo1.png cargado ✓";
-        console.log('✅ Fondo modelo1.png cargado correctamente');
-        modelBg.style.backgroundImage = `url('${img.src}')`;
-        modelBg.style.opacity = '0.5';
+        console.log('Fondo global modelo1.png cargado correctamente');
+        globalBg.classList.add('active');
+        globalBg.style.backgroundImage = `url('${img.src}')`;
     };
     
     img.onerror = function() {
-        debugInfo.textContent = "Error cargando modelo1.png";
-        console.error('❌ ERROR: No se pudo cargar modelo1.png');
-        console.log('🔍 Verifica que:');
-        console.log('1. El archivo existe y se llama EXACTAMENTE "modelo1.png"');
-        console.log('2. Está en la misma carpeta que el HTML');
-        console.log('3. No tiene errores de sintaxis en el nombre');
-        
-        // Usar fondo alternativo
-        modelBg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
-        modelBg.style.opacity = '0.7';
+        console.warn('No se pudo cargar modelo1.png, usando color sólido');
+        globalBg.classList.add('active');
+        globalBg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
     };
-    
-    // Intentar cargar la imagen
-    img.src = 'modelo1.png';
 }
-
-// =============================================
-// SISTEMA DE NAVEGACIÓN
-// =============================================
 
 function setupNavigation() {
     const menuItems = document.querySelectorAll('.menu-item');
@@ -323,15 +283,8 @@ function setupNavigation() {
             // Agregar activo al clickeado
             this.classList.add('active');
             const sectionId = this.getAttribute('data-section') + 'Section';
-            document.getElementById(sectionId).classList.add('active');
             
-            // Si es otra sección que no sea inicio, ocultar el fondo del modelo
-            const modelBg = document.querySelector('.model-background');
-            if (this.getAttribute('data-section') === 'home') {
-                modelBg.style.display = 'block';
-            } else {
-                modelBg.style.display = 'none';
-            }
+            document.getElementById(sectionId).classList.add('active');
         });
     });
 }
@@ -348,7 +301,7 @@ function loadSetImage() {
     img.style.objectFit = 'contain';
     
     img.onload = function() {
-        console.log('✅ Imagen conjunto1.png cargada correctamente');
+        console.log('Imagen conjunto1.png cargada correctamente');
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.5s ease';
         
@@ -358,7 +311,7 @@ function loadSetImage() {
     };
     
     img.onerror = function() {
-        console.warn('⚠️ No se pudo cargar conjunto1.png, usando placeholder');
+        console.warn('No se pudo cargar conjunto1.png, usando placeholder');
         
         const placeholder = document.createElement('div');
         placeholder.style.width = '100%';
@@ -396,10 +349,13 @@ function loadSetImage() {
 // =============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Vestige Catálogo iniciando...');
+    console.log('Vestige Catálogo iniciando...');
     
     // Iniciar animación 3D
     initThreeJS();
+    
+    // Configurar navegación
+    setupNavigation();
     
     // Redimensionamiento
     window.addEventListener('resize', onWindowResize);
