@@ -17,10 +17,10 @@ const hoodiesData = {
         imagen: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
     },
     'hoodie2': {
-        titulo: 'Hoodie Gray Premium',
-        nombre: 'Hoodie Gray Urban',
-        descripcion: 'Hoodie gris con diseño urbano, bolsillo canguro y detalles en contraste. Corte oversize perfecto para streetwear. Solo 75 unidades.',
-        imagen: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+        titulo: 'vestige star one',
+        nombre: 'star pink c1',
+        descripcion: 'el primer conjunto de vestige beta. Solo 75 unidades.',
+        imagen: 'conjuntoprincipal.png'
     },
     'hoodie3': {
         titulo: 'Hoodie Red Signature',
