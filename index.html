@@ -3,223 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestige - Catálogo Exclusivo</title>
+    <title>Vestige - Prendas Únicas VIP</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fase 1: Animación 3D de entrada -->
-    <div id="phase1" class="phase active">
-        <div id="container3d"></div>
-        <div class="phase-info">𝓥𝓮𝓼𝓽𝓲𝓰𝓮</div>
-    </div>
-
-    <!-- Fase 2: Dashboard -->
-    <div id="phase2" class="phase">
-        <!-- Fondo único para toda la aplicación -->
-        <div class="global-background" id="globalBackground">
-            <div class="background-overlay"></div>
+    <!-- Navegación fluida - CENTRADA -->
+    <nav>
+        <div class="nav-container">
+            <a id="linkInicio">Inicio</a>
+            <a id="linkDrop">Drop</a>
         </div>
+    </nav>
 
-        <div class="dashboard">
-            <!-- Sidebar transparente -->
-            <div class="sidebar">
-                <div class="sidebar-header">
-                    <div class="dashboard-logo">
-                        <span class="vestige-text">𝓥𝓮𝓼𝓽𝓲𝓰𝓮</span>
-                        <div class="logo-subtitle">Catálogo Exclusivo</div>
-                    </div>
-                </div>
+    <!-- Sección Inicio - Solo logo sobre la modelo -->
+    <section id="inicio">
+        <h1>𝓥𝓮𝓼𝓽𝓲𝓰𝓮</h1>
+    </section>
 
-                <nav class="sidebar-menu">
-                    <a href="#" class="menu-item active" data-section="home">
-                        <svg class="menu-icon" viewBox="0 0 24 24">
-                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                        </svg>
-                        <span>Inicio</span>
-                    </a>
-                    
-                    <a href="#" class="menu-item" data-section="sets">
-                        <svg class="menu-icon" viewBox="0 0 24 24">
-                            <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-                        </svg>
-                        <span>Conjuntos</span>
-                    </a>
-                    
-                    <a href="#" class="menu-item" data-section="shirts">
-                        <svg class="menu-icon" viewBox="0 0 24 24">
-                            <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-                            <circle cx="7" cy="7" r="2"/>
-                            <circle cx="17" cy="7" r="2"/>
-                        </svg>
-                        <span>Poleras</span>
-                    </a>
-                    
-                    <a href="#" class="menu-item" data-section="pants">
-                        <svg class="menu-icon" viewBox="0 0 24 24">
-                            <path d="M10 2c-1.1 0-2 .9-2 2v5h2V4h4v5h2V4c0-1.1-.9-2-2-2h-4zm-2 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H8zm0 2h8v10H8V12z"/>
-                        </svg>
-                        <span>Pantalones</span>
-                    </a>
-                </nav>
+    <!-- SECCIÓN DROP - SOLO HOODIES FLOTANDO SIN FONDO -->
+    <section id="drop-prendas">
+        <div class="prendas-grid">
+            <!-- Hoodies flotando - SIN FONDO -->
+            <div class="prenda-item" data-prenda="hoodie1">
+                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG1.png" alt="Hoodie Black">
             </div>
-
-            <!-- Contenido principal -->
-            <div class="main-content">
-                <!-- Sección Inicio -->
-                <div class="content-section active" id="homeSection">
-                    <div class="home-hero">
-                        <div class="hero-content">
-                            <h1 class="hero-title">
-                                <span class="vestige-text">𝓥𝓮𝓼𝓽𝓲𝓰𝓮</span>
-                                <span class="hero-subtitle">Colección Exclusiva</span>
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección Conjuntos -->
-                <div class="content-section" id="setsSection">
-                    <div class="section-header">
-                        <h1>Conjuntos</h1>
-                        <p>Selección completa de conjuntos exclusivos</p>
-                    </div>
-                    
-                    <div class="products-grid">
-                        <div class="product-card">
-                            <div class="product-image-container">
-                                <div class="product-image" id="set1Image">
-                                    <!-- Imagen conjunto1.png -->
-                                </div>
-                                <div class="product-badge">Nuevo</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Conjunto #1</h3>
-                                <p>Diseño completo premium de la colección Vestige</p>
-                                <div class="product-tags">
-                                    <span class="tag">Exclusivo</span>
-                                    <span class="tag">Edición Limitada</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card coming-soon">
-                            <div class="coming-soon-overlay">
-                                <span>Próximamente</span>
-                            </div>
-                            <div class="product-image-container">
-                                <div class="product-image placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Conjunto #2</h3>
-                                <p>Próximo lanzamiento de la colección</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección Poleras -->
-                <div class="content-section" id="shirtsSection">
-                    <div class="section-header">
-                        <h1>Poleras</h1>
-                        <p>Diseños únicos en prendas superiores</p>
-                    </div>
-                    
-                    <div class="products-grid">
-                        <div class="product-card coming-soon">
-                            <div class="coming-soon-overlay">
-                                <span>Próximamente</span>
-                            </div>
-                            <div class="product-image-container">
-                                <div class="product-image placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-                                        <circle cx="7" cy="7" r="2"/>
-                                        <circle cx="17" cy="7" r="2"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Polera Estándar</h3>
-                                <p>Diseño clásico con el logo Vestige</p>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card coming-soon">
-                            <div class="coming-soon-overlay">
-                                <span>Próximamente</span>
-                            </div>
-                            <div class="product-image-container">
-                                <div class="product-image placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-                                        <circle cx="7" cy="7" r="2"/>
-                                        <circle cx="17" cy="7" r="2"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Polera Premium</h3>
-                                <p>Materiales premium y diseño exclusivo</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección Pantalones -->
-                <div class="content-section" id="pantsSection">
-                    <div class="section-header">
-                        <h1>Pantalones</h1>
-                        <p>Variedad en prendas inferiores</p>
-                    </div>
-                    
-                    <div class="products-grid">
-                        <div class="product-card coming-soon">
-                            <div class="coming-soon-overlay">
-                                <span>Próximamente</span>
-                            </div>
-                            <div class="product-image-container">
-                                <div class="product-image placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M10 2c-1.1 0-2 .9-2 2v5h2V4h4v5h2V4c0-1.1-.9-2-2-2h-4zm-2 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H8zm0 2h8v10H8V12z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Pantalón Básico</h3>
-                                <p>Comodidad y estilo en diseño básico</p>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card coming-soon">
-                            <div class="coming-soon-overlay">
-                                <span>Próximamente</span>
-                            </div>
-                            <div class="product-image-container">
-                                <div class="product-image placeholder">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M10 2c-1.1 0-2 .9-2 2v5h2V4h4v5h2V4c0-1.1-.9-2-2-2h-4zm-2 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2H8zm0 2h8v10H8V12z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Pantalón Diseñador</h3>
-                                <p>Diseño exclusivo y materiales premium</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="prenda-item" data-prenda="hoodie2">
+                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG3.png" alt="Hoodie Gray">
+            </div>
+            <div class="prenda-item" data-prenda="hoodie3">
+                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG5.png" alt="Hoodie Red">
+            </div>
+            <div class="prenda-item" data-prenda="hoodie4">
+                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG9.png" alt="Hoodie White">
             </div>
         </div>
-    </div>
+        
+        <button class="btn-volver" id="volverInicioDesdePrendas">Volver al Inicio</button>
+    </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
+    <!-- SECCIÓN DETALLES DE PRENDA (solo aparece cuando se hace click) -->
+    <section id="drop-detalle">
+        <h2 id="detalle-titulo">Hoodie Black Edition</h2>
+        
+        <div class="conjunto">
+            <img id="detalle-imagen" src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoodie VIP">
+            <div class="detalles">
+                <h3 id="detalle-nombre">Hoodie Black Premium</h3>
+                <p id="detalle-descripcion">Hoodie negro premium con capucha ajustable, detalles en cuero sintético y estampado único en la espalda. Material: 80% algodón, 20% poliéster. Edición limitada a 100 unidades.</p>
+                <div class="contador" id="contador">Lanzamiento en: <span id="tiempo">7 días</span></div>
+            </div>
+        </div>
+        
+        <div class="reserva">
+            <h4>Reserva Tu Acceso Exclusivo</h4>
+            <p>Ingresa tus datos para asegurar tu hoodie. Te notificaremos al lanzamiento.</p>
+            <form id="formReserva">
+                <input type="text" id="nombre" placeholder="Nombre Completo" required>
+                <input type="email" id="email" placeholder="Email VIP" required>
+                <select id="talla" required>
+                    <option value="">Selecciona Talla</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <button type="submit">Reservar Ahora</button>
+            </form>
+        </div>
+        
+        <button class="btn-volver" id="volverPrendas">Volver a Hoodies</button>
+        
+        <footer>
+            <p>&copy; 2023 Vestige. Acceso exclusivo para insiders. Todas las reservas son limitadas.</p>
+        </footer>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
