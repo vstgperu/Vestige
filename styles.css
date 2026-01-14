@@ -1,7 +1,7 @@
 /* Fondo general para toda la página - Imagen de modelo Versace */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background: url('modelo1.png') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     margin: 0;
