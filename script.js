@@ -1,370 +1,197 @@
-// =============================================
-// THREE.JS - ANIMACIÓN DE ENTRADA
-// =============================================
+// Elementos
+const inicio = document.getElementById('inicio');
+const dropPrendas = document.getElementById('drop-prendas');
+const dropDetalle = document.getElementById('drop-detalle');
+const linkInicio = document.getElementById('linkInicio');
+const linkDrop = document.getElementById('linkDrop');
+const volverInicioDesdePrendas = document.getElementById('volverInicioDesdePrendas');
+const volverPrendas = document.getElementById('volverPrendas');
+const prendaItems = document.querySelectorAll('.prenda-item');
 
-let scene, camera, renderer, textMeshV, textMeshG;
-let currentPhase = 0;
-let startTime;
-let animationId;
-
-function initThreeJS() {
-    // 1. Escena
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-    
-    // 2. Cámara
-    camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-    camera.position.z = 40;
-    
-    // 3. Renderer
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('container3d').appendChild(renderer.domElement);
-    
-    // 4. Luces
-    setupLights();
-    
-    // 5. Cargar fuente y crear texto
-    loadFont();
-    
-    // 6. Iniciar animación
-    startAnimation();
-}
-
-function setupLights() {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(10, 20, 15);
-    scene.add(directionalLight);
-}
-
-function loadFont() {
-    const loader = new THREE.FontLoader();
-    
-    loader.load(
-        'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
-        function(font) {
-            createText3D(font);
-        },
-        function(xhr) {
-            console.log('Cargando fuente: ' + (xhr.loaded / xhr.total * 100) + '%');
-        },
-        function(error) {
-            console.error('Error cargando fuente:', error);
-            createFallbackText();
-        }
-    );
-}
-
-function createText3D(font) {
-    const textSettings = {
-        font: font,
-        size: 8,
-        height: 3,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 0.5,
-        bevelSize: 0.3,
-        bevelOffset: 0,
-        bevelSegments: 5
-    };
-    
-    // Crear "V"
-    const geometryV = new THREE.TextGeometry('V', textSettings);
-    geometryV.center();
-    
-    const materialV = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        shininess: 100,
-        specular: 0x222222
-    });
-    
-    textMeshV = new THREE.Mesh(geometryV, materialV);
-    textMeshV.position.x = -10;
-    textMeshV.position.y = -20;
-    
-    // Crear "G"
-    const geometryG = new THREE.TextGeometry('G', textSettings);
-    geometryG.center();
-    
-    const materialG = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        shininess: 100,
-        specular: 0x222222
-    });
-    
-    textMeshG = new THREE.Mesh(geometryG, materialG);
-    textMeshG.position.x = 10;
-    textMeshG.position.y = 20;
-    
-    scene.add(textMeshV);
-    scene.add(textMeshG);
-}
-
-function createFallbackText() {
-    const canvasV = document.createElement('canvas');
-    const ctxV = canvasV.getContext('2d');
-    canvasV.width = 256;
-    canvasV.height = 256;
-    
-    ctxV.fillStyle = '#000000';
-    ctxV.fillRect(0, 0, canvasV.width, canvasV.height);
-    ctxV.fillStyle = '#ffffff';
-    ctxV.font = '200px Arial';
-    ctxV.textAlign = 'center';
-    ctxV.textBaseline = 'middle';
-    ctxV.fillText('V', canvasV.width/2, canvasV.height/2);
-    
-    const textureV = new THREE.CanvasTexture(canvasV);
-    const materialV = new THREE.MeshBasicMaterial({ map: textureV, transparent: true });
-    const geometryV = new THREE.PlaneGeometry(10, 10);
-    textMeshV = new THREE.Mesh(geometryV, materialV);
-    textMeshV.position.x = -10;
-    textMeshV.position.y = -20;
-    
-    const canvasG = document.createElement('canvas');
-    const ctxG = canvasG.getContext('2d');
-    canvasG.width = 256;
-    canvasG.height = 256;
-    
-    ctxG.fillStyle = '#000000';
-    ctxG.fillRect(0, 0, canvasG.width, canvasG.height);
-    ctxG.fillStyle = '#ffffff';
-    ctxG.font = '200px Arial';
-    ctxG.textAlign = 'center';
-    ctxG.textBaseline = 'middle';
-    ctxG.fillText('G', canvasG.width/2, canvasG.height/2);
-    
-    const textureG = new THREE.CanvasTexture(canvasG);
-    const materialG = new THREE.MeshBasicMaterial({ map: textureG, transparent: true });
-    const geometryG = new THREE.PlaneGeometry(10, 10);
-    textMeshG = new THREE.Mesh(geometryG, materialG);
-    textMeshG.position.x = 10;
-    textMeshG.position.y = 20;
-    
-    scene.add(textMeshV);
-    scene.add(textMeshG);
-}
-
-function startAnimation() {
-    startTime = Date.now();
-    currentPhase = 0;
-    animate();
-}
-
-function animate() {
-    animationId = requestAnimationFrame(animate);
-    
-    const currentTime = Date.now() - startTime;
-    
-    if (textMeshV && textMeshG) {
-        switch(currentPhase) {
-            case 0: // ENTRADA (0-2 segundos)
-                const t1 = Math.min(currentTime / 2000, 1);
-                
-                textMeshV.position.x = THREE.MathUtils.lerp(-10, -4, t1);
-                textMeshV.position.y = THREE.MathUtils.lerp(-20, 0, t1);
-                textMeshV.rotation.y = t1 * Math.PI * 2;
-                
-                textMeshG.position.x = THREE.MathUtils.lerp(10, 4, t1);
-                textMeshG.position.y = THREE.MathUtils.lerp(20, 0, t1);
-                textMeshG.rotation.y = -t1 * Math.PI * 2;
-                
-                if (t1 >= 1) {
-                    currentPhase = 1;
-                    startTime = Date.now();
-                }
-                break;
-                
-            case 1: // GIRO EN EL CENTRO (2-6 segundos)
-                const elapsed = currentTime;
-                
-                textMeshV.rotation.y += 0.01;
-                textMeshG.rotation.y -= 0.01;
-                
-                textMeshV.position.y = Math.sin(Date.now() * 0.001) * 0.3;
-                textMeshG.position.y = Math.cos(Date.now() * 0.001) * 0.3;
-                
-                camera.position.x = Math.sin(Date.now() * 0.0005) * 20;
-                camera.position.z = 40 + Math.cos(Date.now() * 0.0005) * 5;
-                camera.lookAt(0, 0, 0);
-                
-                if (elapsed >= 4000) {
-                    currentPhase = 2;
-                    startTime = Date.now();
-                }
-                break;
-                
-            case 2: // SALIDA/DESVANECIMIENTO (6-8 segundos)
-                const t2 = Math.min(currentTime / 2000, 1);
-                
-                textMeshV.position.x = THREE.MathUtils.lerp(-4, -10, t2);
-                textMeshV.position.y = THREE.MathUtils.lerp(0, -20, t2);
-                textMeshV.material.opacity = 1 - t2;
-                textMeshV.material.transparent = true;
-                
-                textMeshG.position.x = THREE.MathUtils.lerp(4, 10, t2);
-                textMeshG.position.y = THREE.MathUtils.lerp(0, 20, t2);
-                textMeshG.material.opacity = 1 - t2;
-                textMeshG.material.transparent = true;
-                
-                if (t2 >= 1) {
-                    setTimeout(showDashboard, 1000);
-                }
-                break;
-        }
+// Datos de las hoodies
+const hoodiesData = {
+    'hoodie1': {
+        titulo: 'Hoodie Black Edition',
+        nombre: 'Hoodie Black Premium',
+        descripcion: 'Hoodie negro premium con capucha ajustable, detalles en cuero sintético y estampado único en la espalda. Material: 80% algodón, 20% poliéster. Edición limitada a 100 unidades.',
+        imagen: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'hoodie2': {
+        titulo: 'Hoodie Gray Premium',
+        nombre: 'Hoodie Gray Urban',
+        descripcion: 'Hoodie gris con diseño urbano, bolsillo canguro y detalles en contraste. Corte oversize perfecto para streetwear. Solo 75 unidades.',
+        imagen: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'hoodie3': {
+        titulo: 'Hoodie Red Signature',
+        nombre: 'Hoodie Red Limited',
+        descripcion: 'Hoodie rojo con capucha bordada, cierre frontal premium y diseño minimalista. Exclusivo para coleccionistas. Solo 50 unidades.',
+        imagen: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'hoodie4': {
+        titulo: 'Hoodie White Exclusive',
+        nombre: 'Hoodie White Premium',
+        descripcion: 'Hoodie blanco con detalles en negro, corte moderno y materiales de alta calidad. Diseño exclusivo Vestige. Limitado a 25 unidades.',
+        imagen: 'https://images.unsplash.com/photo-1578763460786-2301c013b0c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
     }
-    
-    renderer.render(scene, camera);
+};
+
+// Inicializar: Solo Inicio visible
+inicio.classList.remove('hidden');
+dropPrendas.classList.remove('visible');
+dropDetalle.classList.remove('visible');
+
+// Función para mostrar Inicio
+function showInicio() {
+    inicio.classList.remove('hidden');
+    dropPrendas.classList.remove('visible');
+    dropDetalle.classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function showDashboard() {
-    if (animationId) cancelAnimationFrame(animationId);
-    
-    if (scene && textMeshV && textMeshG) {
-        scene.remove(textMeshV);
-        scene.remove(textMeshG);
+// Función para mostrar Drop (solo hoodies flotando)
+function showDropPrendas() {
+    inicio.classList.add('hidden');
+    dropPrendas.classList.add('visible');
+    dropDetalle.classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Función para mostrar detalle de hoodie
+function showDropDetalle(hoodieId) {
+    const hoodie = hoodiesData[hoodieId];
+    if (hoodie) {
+        document.getElementById('detalle-titulo').textContent = hoodie.titulo;
+        document.getElementById('detalle-nombre').textContent = hoodie.nombre;
+        document.getElementById('detalle-descripcion').textContent = hoodie.descripcion;
+        document.getElementById('detalle-imagen').src = hoodie.imagen;
+        
+        inicio.classList.add('hidden');
+        dropPrendas.classList.remove('visible');
+        dropDetalle.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    
-    document.getElementById('phase1').classList.remove('active');
-    document.getElementById('phase2').classList.add('active');
-    
-    // Activar fondo global
-    activateGlobalBackground();
-    
-    // Cargar imagen del conjunto
-    loadSetImage();
 }
 
-// =============================================
-// SISTEMA DE FONDOS Y NAVEGACIÓN
-// =============================================
-
-function activateGlobalBackground() {
-    const globalBg = document.getElementById('globalBackground');
-    
-    // Verificar si la imagen existe
-    const img = new Image();
-    img.src = 'modelo1.png';
-    
-    img.onload = function() {
-        console.log('Fondo global modelo1.png cargado correctamente');
-        globalBg.classList.add('active');
-        globalBg.style.backgroundImage = `url('${img.src}')`;
-    };
-    
-    img.onerror = function() {
-        console.warn('No se pudo cargar modelo1.png, usando color sólido');
-        globalBg.classList.add('active');
-        globalBg.style.background = 'linear-gradient(45deg, #0a0a0f, #1a1a2e)';
-    };
-}
-
-function setupNavigation() {
-    const menuItems = document.querySelectorAll('.menu-item');
-    const sections = document.querySelectorAll('.content-section');
-    
-    menuItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remover activo de todo
-            menuItems.forEach(i => i.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
-            
-            // Agregar activo al clickeado
-            this.classList.add('active');
-            const sectionId = this.getAttribute('data-section') + 'Section';
-            
-            document.getElementById(sectionId).classList.add('active');
-        });
-    });
-}
-
-// CARGAR IMAGEN DEL CONJUNTO
-function loadSetImage() {
-    const setImageContainer = document.getElementById('set1Image');
-    
-    const img = document.createElement('img');
-    img.src = 'conjunto1.png';
-    img.alt = 'Conjunto Vestige #1';
-    img.style.maxWidth = '100%';
-    img.style.maxHeight = '100%';
-    img.style.objectFit = 'contain';
-    
-    img.onload = function() {
-        console.log('Imagen conjunto1.png cargada correctamente');
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.5s ease';
-        
-        setTimeout(() => {
-            img.style.opacity = '1';
-        }, 100);
-    };
-    
-    img.onerror = function() {
-        console.warn('No se pudo cargar conjunto1.png, usando placeholder');
-        
-        const placeholder = document.createElement('div');
-        placeholder.style.width = '100%';
-        placeholder.style.height = '100%';
-        placeholder.style.display = 'flex';
-        placeholder.style.flexDirection = 'column';
-        placeholder.style.alignItems = 'center';
-        placeholder.style.justifyContent = 'center';
-        placeholder.style.color = 'rgba(255, 255, 255, 0.3)';
-        placeholder.style.textAlign = 'center';
-        
-        const icon = document.createElement('div');
-        icon.innerHTML = `
-            <svg width="80" height="80" viewBox="0 0 24 24" style="fill: rgba(102, 126, 234, 0.3); margin-bottom: 20px;">
-                <path d="M21.6 18.2L13 11.75v-.8c1.35-.49 2.25-1.62 2.25-2.95 0-1.62-1.38-2.94-3.08-2.94s-3.08 1.32-3.08 2.94c0 1.33.9 2.46 2.25 2.95v.8L2.4 18.2c-.66.55-.75 1.55-.2 2.21.55.66 1.55.75 2.21.2L12 14.25l7.6 6.36c.66.55 1.66.46 2.21-.2.55-.66.46-1.66-.2-2.21z"/>
-            </svg>
-        `;
-        
-        const text = document.createElement('div');
-        text.innerHTML = `
-            <div style="font-size: 18px; margin-bottom: 10px; color: rgba(255, 255, 255, 0.5);">Conjunto #1</div>
-            <div style="font-size: 14px; color: rgba(255, 255, 255, 0.3);">Imagen no disponible</div>
-        `;
-        
-        placeholder.appendChild(icon);
-        placeholder.appendChild(text);
-        setImageContainer.appendChild(placeholder);
-    };
-    
-    setImageContainer.appendChild(img);
-}
-
-// =============================================
-// INICIALIZACIÓN
-// =============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Vestige Catálogo iniciando...');
-    
-    // Iniciar animación 3D
-    initThreeJS();
-    
-    // Configurar navegación
-    setupNavigation();
-    
-    // Redimensionamiento
-    window.addEventListener('resize', onWindowResize);
+// Eventos de navegación
+linkInicio.addEventListener('click', function(e) {
+    e.preventDefault();
+    showInicio();
 });
 
-function onWindowResize() {
-    if (camera && renderer) {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+linkDrop.addEventListener('click', function(e) {
+    e.preventDefault();
+    showDropPrendas();
+});
+
+// Eventos para hoodies
+prendaItems.forEach(item => {
+    item.addEventListener('click', function() {
+        const hoodieId = this.getAttribute('data-prenda');
+        showDropDetalle(hoodieId);
+    });
+});
+
+// Eventos para botones volver
+volverInicioDesdePrendas.addEventListener('click', showInicio);
+volverPrendas.addEventListener('click', showDropPrendas);
+
+// Contador de tiempo
+let tiempoRestante = 7 * 24 * 60 * 60 * 1000;
+const contadorEl = document.getElementById('tiempo');
+
+function actualizarContador() {
+    tiempoRestante -= 1000;
+    const dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    if (dias > 0) {
+        contadorEl.textContent = dias + ' días ' + horas + ' horas';
+    } else {
+        contadorEl.textContent = '¡Disponible ahora!';
+        clearInterval(contadorInterval);
     }
 }
+
+const contadorInterval = setInterval(actualizarContador, 1000);
+actualizarContador();
+
+// Manejo del formulario
+document.getElementById('formReserva').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const talla = document.getElementById('talla').value;
+    
+    if (!nombre || !email || !talla) {
+        alert('Por favor completa todos los campos.');
+        return;
+    }
+    
+    const reserva = {
+        nombre: nombre,
+        email: email,
+        talla: talla,
+        fecha: new Date().toISOString(),
+        hoodie: document.getElementById('detalle-nombre').textContent
+    };
+    
+    localStorage.setItem('vestige_reserva', JSON.stringify(reserva));
+    
+    alert('✅ ¡Reserva confirmada, ' + nombre + '!\n\nHoodie: ' + reserva.hoodie + '\nTalla: ' + talla + '\n\nRecibirás acceso VIP 24h antes del lanzamiento.');
+    
+    this.reset();
+    
+    setTimeout(() => {
+        showDropPrendas();
+    }, 2000);
+});
+
+// Scroll suave sin parallax
+let isScrolling;
+window.addEventListener('scroll', function() {
+    window.clearTimeout(isScrolling);
+    
+    isScrolling = setTimeout(function() {
+        // Efecto sutil en las hoodies al hacer scroll
+        const scrolled = window.pageYOffset;
+        const prendas = document.querySelectorAll('.prenda-item img');
+        prendas.forEach((img, index) => {
+            const scrollEffect = Math.sin(scrolled * 0.001 + index) * 5;
+            img.style.transform = 'translateY(' + scrollEffect + 'px) scale(1.05)';
+            
+            setTimeout(() => {
+                img.style.transform = '';
+            }, 300);
+        });
+    }, 66);
+}, false);
+
+// Prevenir comportamientos por defecto en enlaces
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
+            e.preventDefault();
+        }
+    });
+});
+
+// Cerrar con ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (dropDetalle.classList.contains('visible')) {
+            showDropPrendas();
+        } else if (dropPrendas.classList.contains('visible')) {
+            showInicio();
+        }
+    }
+});
+
+// Smooth scroll para toda la página
+document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    window.scrollBy({
+        top: e.deltaY * 0.5, // Reducir velocidad para más fluidez
+        behavior: 'smooth'
+    });
+}, { passive: false });
