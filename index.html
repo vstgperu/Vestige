@@ -3,81 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestige - Prendas Únicas VIP</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Vestige</title>
+    <style>
+        /* Reset y base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: url('modelo1.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #000;
+            overflow-x: hidden;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Header exacto de Denim Tears */
+        .site-header {
+            padding: 16px 10px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+        }
+
+        .header__inner-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #000;
+            background: #fff;
+            padding: 16px 13px;
+        }
+
+        @media (min-width: 768px) {
+            .header__inner-content {
+                padding-right: 22px;
+                padding-left: 19px;
+            }
+        }
+
+        /* Menú móvil */
+        .mobile-menu {
+            margin-right: auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-icon-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 20px;
+        }
+
+        .menu-icon-container span {
+            height: 2px;
+            background: #000;
+            transition: 0.3s;
+        }
+
+        .menu-icon-container span:first-child {
+            width: 100%;
+        }
+
+        .menu-icon-container span:last-child {
+            width: 70%;
+        }
+
+        /* Logo */
+        .logo__wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo__wrapper a {
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        @media (min-width: 768px) {
+            .logo__wrapper {
+                margin-right: 16px;
+                width: 170px;
+                flex-shrink: 0;
+            }
+        }
+
+        /* Navegación principal */
+        .main__nav {
+            display: flex;
+        }
+
+        @media (min-width: 768px) {
+            .main__nav {
+                flex-grow: 1;
+            }
+        }
+
+        /* Navegación izquierda */
+        .left-nav {
+            display: flex;
+            align-items: center;
+            border: 2px solid #000;
+        }
+
+        @media (min-width: 768px) {
+            .left-nav {
+                border: 0;
+                padding-left: 12px;
+                padding-right: 12px;
+                margin-left: 8px;
+                background: transparent !important;
+            }
+        }
+
+        /* Items de navegación */
+        .nav__item {
+            width: 100%;
+            text-align: left;
+            border-bottom: 2px solid #000;
+            background: #fff;
+        }
+
+        .nav__item:last-child {
+            border-bottom: none;
+        }
+
+        .nav__item .label {
+            font-weight: bold;
+            padding: 20px;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .nav__item a {
+            display: block;
+            font-weight: bold;
+            padding: 20px;
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav__item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contenido expandible */
+        .expandable-inner-content {
+            padding: 0 20px 20px;
+            background: #fff;
+        }
+
+        .mobile__nav {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        .mobile__nav_item {
+            margin-bottom: 12px;
+        }
+
+        .mobile__nav_item a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .mobile__nav_item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Selector de país */
+        .country-selector-mobile button {
+            width: 100%;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .country-selector-mobile button {
+                justify-content: flex-start;
+                font-size: 16px;
+                padding: 0;
+            }
+            
+            .country-selector-mobile .country-name {
+                display: block;
+            }
+        }
+
+        .country-selector-mobile .country-name {
+            display: none;
+        }
+
+        /* Carrito */
+        .cart__item {
+            margin-left: 24px;
+            text-align: right;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .cart__item:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 768px) {
+            .cart__item {
+                font-size: 16px;
+            }
+        }
+
+        /* Botón shop */
+        .shop-button-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .shop-button {
+            display: inline-flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .shop-button:hover {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .shop-button svg {
+            margin-left: 8px;
+        }
+
+        /* Overlay oscuro */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Contenido principal */
+        main {
+            flex-grow: 1;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .nav__item,
+            .left-nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .cart__item {
+                min-width: 65px;
+                flex-shrink: 0;
+            }
+            
+            .main__nav {
+                margin-left: auto;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu,
+            .mobile-underlay {
+                display: none;
+            }
+            
+            .nav__item,
+            .left-nav {
+                display: block;
+            }
+            
+            .left-nav {
+                display: flex;
+            }
+            
+            .main__nav .flex.items-center.ml-auto {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+            }
+            
+            .country-selector-mobile {
+                display: block;
+            }
+            
+            .shop-button {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+        }
+
+        /* Estados móvil */
+        .mobile-open .left-nav {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            right: 10px;
+            background: #fff;
+            z-index: 25;
+            border: 2px solid #000;
+        }
+
+        .mobile-open .nav__item {
+            display: block;
+        }
+
+        .mobile-underlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 15;
+            display: none;
+        }
+
+        .mobile-open .mobile-underlay {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navegación fluida - CENTRADA -->
-    <nav>
-        <div class="nav-container">
-            <a id="linkInicio">Inicio</a>
-            <a id="linkDrop">Drop</a>
-        </div>
-    </nav>
+    <!-- Header idéntico a Denim Tears -->
+    <div class="site-header" role="banner">
+        <div class="header__inner-content">
+            <!-- Menú móvil -->
+            <button class="mobile-menu menu-icon">
+                <div class="menu-icon-container">
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
 
-    <!-- Sección Inicio - Solo logo sobre la modelo -->
-    <section id="inicio">
-        <h1>𝓥𝓮𝓼𝓽𝓲𝓰𝓮</h1>
-    </section>
+            <!-- Logo -->
+            <div class="logo__wrapper">
+                <a href="/">VESTIGE</a>
+            </div>
 
-    <!-- SECCIÓN DROP - SOLO HOODIES FLOTANDO SIN FONDO -->
-    <section id="drop-prendas">
-        <div class="prendas-grid">
-            <!-- Hoodies flotando - SIN FONDO -->
-            <div class="prenda-item" data-prenda="hoodie1">
-                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG1.png" alt="Hoodie Black">
-            </div>
-            <div class="prenda-item" data-prenda="hoodie2">
-                <img src="conjuntoprincipal.png" alt="Hoodie Gray">
-            </div>
-            <div class="prenda-item" data-prenda="hoodie3">
-                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG5.png" alt="Hoodie Red">
-            </div>
-            <div class="prenda-item" data-prenda="hoodie4">
-                <img src="https://pngimg.com/uploads/hoodie/hoodie_PNG9.png" alt="Hoodie White">
+            <!-- Navegación principal -->
+            <div class="main__nav">
+                <!-- Navegación izquierda -->
+                <div class="left-nav nav__items">
+                    <!-- Shop con dropdown -->
+                    <div class="nav__item">
+                        <button class="label">Shop</button>
+                        <div class="expandable-inner-content">
+                            <div class="mobile__nav">
+                                <div class="mobile__nav_item"><a href="/new">New</a></div>
+                                <div class="mobile__nav_item"><a href="/all">All</a></div>
+                                <div class="mobile__nav_item"><a href="/shorts">Shorts</a></div>
+                                <div class="mobile__nav_item"><a href="/tees">Tees</a></div>
+                                <div class="mobile__nav_item"><a href="/accessories">Accessories</a></div>
+                                <div class="mobile__nav_item"><a href="/bottoms">Bottoms</a></div>
+                                <div class="mobile__nav_item"><a href="/denim">Denim</a></div>
+                                <div class="mobile__nav_item"><a href="/headwear">Headwear</a></div>
+                                <div class="mobile__nav_item"><a href="/outerwear">Outerwear</a></div>
+                                <div class="mobile__nav_item"><a href="/sweats">Sweats</a></div>
+                                <div class="mobile__nav_item"><a href="/tops">Tops</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Otras páginas -->
+                    <div class="nav__item"><a href="/stores">Stores</a></div>
+                    <div class="nav__item"><a href="/stories">Stories</a></div>
+                    <div class="nav__item"><a href="/about">About</a></div>
+
+                    <!-- Selector de país -->
+                    <div class="nav__item">
+                        <div class="country-selector-mobile">
+                            <button class="country-select-button">
+                                <span class="country-name">PE/PEN</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="4" viewBox="0 0 10 5" fill="none">
+                                    <path d="M1 1L5.12903 4L9 1" stroke="black"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carrito y país (desktop) -->
+                <div class="flex items-center ml-auto">
+                    <!-- País solo desktop -->
+                    <div class="hidden md:block">
+                        <button class="country-select-button">
+                            <span class="country-name">PE/PEN</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="4" viewBox="0 0 10 5" fill="none">
+                                <path d="M1 1L5.12903 4L9 1" stroke="black"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Carrito -->
+                    <div>
+                        <div class="nav__item cart__item">
+                            <span>Cart</span> (0)
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <button class="btn-volver" id="volverInicioDesdePrendas">Volver al Inicio</button>
-    </section>
+        <!-- Underlay móvil -->
+        <div class="mobile-underlay"></div>
+    </div>
 
-    <!-- SECCIÓN DETALLES DE PRENDA (solo aparece cuando se hace click) -->
-    <section id="drop-detalle">
-        <h2 id="detalle-titulo">Hoodie Black Edition</h2>
+    <!-- Contenido principal con tu imagen de fondo -->
+    <main role="main">
+        <!-- Overlay oscuro para mejor legibilidad -->
+        <div class="overlay"></div>
         
-        <div class="conjunto">
-            <img id="detalle-imagen" src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoodie VIP">
-            <div class="detalles">
-                <h3 id="detalle-nombre">Hoodie Black Premium</h3>
-                <p id="detalle-descripcion">Hoodie negro premium con capucha ajustable, detalles en cuero sintético y estampado único en la espalda. Material: 80% algodón, 20% poliéster. Edición limitada a 100 unidades.</p>
-                <div class="contador" id="contador">Lanzamiento en: <span id="tiempo">7 días</span></div>
-            </div>
+        <!-- Botón Shop Now -->
+        <div class="shop-button-wrapper">
+            <a href="/shop" class="shop-button">
+                SHOP NOW
+                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="9" fill="none">
+                    <path stroke="currentColor" d="m1 8.5 4-4.129L1 .5"></path>
+                </svg>
+            </a>
         </div>
-        
-        <div class="reserva">
-            <h4>Reserva Tu Acceso Exclusivo</h4>
-            <p>Ingresa tus datos para asegurar tu hoodie. Te notificaremos al lanzamiento.</p>
-            <form id="formReserva">
-                <input type="text" id="nombre" placeholder="Nombre Completo" required>
-                <input type="email" id="email" placeholder="Email VIP" required>
-                <select id="talla" required>
-                    <option value="">Selecciona Talla</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                </select>
-                <button type="submit">Reservar Ahora</button>
-            </form>
-        </div>
-        
-        <button class="btn-volver" id="volverPrendas">Volver a Hoodies</button>
-        
-        <footer>
-            <p>&copy; 2023 Vestige. Acceso exclusivo para insiders. Todas las reservas son limitadas.</p>
-        </footer>
-    </section>
+    </main>
 
-    <script src="script.js"></script>
+    <script>
+        // Toggle menú móvil
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const body = document.body;
+        const mobileUnderlay = document.querySelector('.mobile-underlay');
+
+        mobileMenu.addEventListener('click', () => {
+            body.classList.toggle('mobile-open');
+        });
+
+        mobileUnderlay.addEventListener('click', () => {
+            body.classList.remove('mobile-open');
+        });
+
+        // Toggle dropdown de Shop
+        const shopButton = document.querySelector('.nav__item .label');
+        const shopDropdown = document.querySelector('.expandable-inner-content');
+
+        shopButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            shopDropdown.style.display = 
+                shopDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cerrar dropdown al hacer click fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav__item')) {
+                shopDropdown.style.display = 'none';
+            }
+        });
+
+        // Selector de país
+        const countryButtons = document.querySelectorAll('.country-select-button');
+        
+        countryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Selector de país - Funcionalidad por implementar');
+            });
+        });
+
+        // Carrito
+        const cartButton = document.querySelector('.cart__item');
+        cartButton.addEventListener('click', () => {
+            alert('Carrito - Funcionalidad por implementar');
+        });
+
+        // Animación de entrada
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
