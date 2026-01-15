@@ -3,830 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Vestige</title>
-    <style>
-        /* Reset y base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>Vestige – Shop</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #fff;
-            color: #000;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Header exacto de Denim Tears */
-        .site-header {
-            padding: 16px 10px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: #fff;
-        }
-
-        .header__inner-content {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid #000;
-            background: #fff;
-            padding: 16px 13px;
-        }
-
-        @media (min-width: 768px) {
-            .header__inner-content {
-                padding-right: 22px;
-                padding-left: 19px;
-            }
-        }
-
-        /* Menú móvil */
-        .mobile-menu {
-            margin-right: auto;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .menu-icon-container {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            width: 20px;
-        }
-
-        .menu-icon-container span {
-            height: 2px;
-            background: #000;
-            transition: 0.3s;
-        }
-
-        .menu-icon-container span:first-child {
-            width: 100%;
-        }
-
-        .menu-icon-container span:last-child {
-            width: 70%;
-        }
-
-        /* Logo */
-        .logo__wrapper {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo__wrapper a {
-            font-weight: 900;
-            font-size: 24px;
-            letter-spacing: 1px;
-            color: #000;
-            text-decoration: none;
-        }
-
-        @media (min-width: 768px) {
-            .logo__wrapper {
-                margin-right: 16px;
-                width: 170px;
-                flex-shrink: 0;
-            }
-        }
-
-        /* Navegación principal */
-        .main__nav {
-            display: flex;
-        }
-
-        @media (min-width: 768px) {
-            .main__nav {
-                flex-grow: 1;
-            }
-        }
-
-        /* Navegación izquierda */
-        .left-nav {
-            display: flex;
-            align-items: center;
-            border: 2px solid #000;
-        }
-
-        @media (min-width: 768px) {
-            .left-nav {
-                border: 0;
-                padding-left: 12px;
-                padding-right: 12px;
-                margin-left: 8px;
-                background: transparent !important;
-            }
-        }
-
-        /* Items de navegación */
-        .nav__item {
-            width: 100%;
-            text-align: left;
-            border-bottom: 2px solid #000;
-            background: #fff;
-        }
-
-        .nav__item:last-child {
-            border-bottom: none;
-        }
-
-        .nav__item .label {
-            font-weight: bold;
-            padding: 20px;
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .nav__item a {
-            display: block;
-            font-weight: bold;
-            padding: 20px;
-            color: #000;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .nav__item a:hover {
-            text-decoration: underline;
-        }
-
-        /* Contenido expandible */
-        .expandable-inner-content {
-            padding: 0 20px 20px;
-            background: #fff;
-            display: none;
-        }
-
-        .mobile__nav {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            padding-bottom: 20px;
-        }
-
-        .mobile__nav_item {
-            margin-bottom: 12px;
-        }
-
-        .mobile__nav_item a {
-            display: block;
-            color: #000;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .mobile__nav_item a:hover {
-            text-decoration: underline;
-        }
-
-        /* Selector de país */
-        .country-selector-mobile button {
-            width: 100%;
-            font-weight: bold;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .country-selector-mobile button {
-                justify-content: flex-start;
-                font-size: 16px;
-                padding: 0;
-            }
-            
-            .country-selector-mobile .country-name {
-                display: block;
-            }
-        }
-
-        .country-selector-mobile .country-name {
-            display: none;
-        }
-
-        /* Carrito */
-        .cart__item {
-            margin-left: 24px;
-            text-align: right;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            color: #000;
-        }
-
-        .cart__item:hover {
-            text-decoration: underline;
-        }
-
-        @media (min-width: 768px) {
-            .cart__item {
-                font-size: 16px;
-            }
-        }
-
-        /* Contenido principal */
-        main {
-            margin-top: 100px;
-            padding: 40px 20px;
-        }
-
-        /* Filtros */
-        .filters {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #000;
-        }
-
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid #000;
-            background: #fff;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #000;
-            color: #fff;
-        }
-
-        /* Grid de productos */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            border: 2px solid #000;
-            background: #fff;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            position: relative;
-            background: #f5f5f5;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-title {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .product-price {
-            font-size: 14px;
-            color: #333;
-        }
-
-        .product-tags {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .product-tag {
-            background: #000;
-            color: #fff;
-            padding: 4px 8px;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        /* Paginación */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 2px solid #000;
-        }
-
-        .page-btn {
-            padding: 10px 15px;
-            border: 2px solid #000;
-            background: #fff;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .page-btn.active {
-            background: #000;
-            color: #fff;
-        }
-
-        /* Footer */
-        footer {
-            background: #000;
-            color: #fff;
-            padding: 60px 20px 30px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        .copyright {
-            text-align: center;
-            font-size: 12px;
-            opacity: 0.7;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 767px) {
-            .left-nav {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .cart__item {
-                min-width: 65px;
-                flex-shrink: 0;
-            }
-            
-            .main__nav {
-                margin-left: auto;
-            }
-            
-            main {
-                margin-top: 80px;
-                padding: 20px 15px;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .product-image {
-                height: 250px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .mobile-menu,
-            .mobile-underlay {
-                display: none;
-            }
-            
-            .left-nav {
-                display: flex;
-            }
-            
-            .main__nav .flex.items-center.ml-auto {
-                display: flex;
-                align-items: center;
-                margin-left: auto;
-            }
-            
-            .country-selector-mobile {
-                display: block;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .products-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 30px;
-            }
-        }
-
-        /* Estados móvil */
-        .mobile-open .left-nav {
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 80px;
-            left: 10px;
-            right: 10px;
-            background: #fff;
-            z-index: 999;
-            border: 2px solid #000;
-        }
-
-        .mobile-open .nav__item {
-            display: block;
-        }
-
-        .mobile-underlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            display: none;
-        }
-
-        .mobile-open .mobile-underlay {
-            display: block;
-        }
-        
-        /* Categorías dropdown en desktop */
-        @media (min-width: 768px) {
-            .nav__item {
-                position: relative;
-                border-bottom: none;
-                background: transparent;
-            }
-            
-            .nav__item .label {
-                padding: 0;
-            }
-            
-            .expandable-inner-content {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 200px;
-                border: 2px solid #000;
-                background: #fff;
-                z-index: 1000;
-                padding: 20px;
-            }
-            
-            .mobile__nav_item {
-                margin-bottom: 10px;
-            }
-        }
-        
-        /* Loading skeleton */
-        .loading-skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="shop.css">
 </head>
 <body>
-    <!-- Header idéntico -->
-    <div class="site-header" role="banner">
-        <div class="header__inner-content">
-            <!-- Menú móvil -->
-            <button class="mobile-menu menu-icon">
-                <div class="menu-icon-container">
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
 
-            <!-- Logo -->
-            <div class="logo__wrapper">
-                <a href="index.html">VESTIGE</a>
+<!-- ================= HEADER (EL MISMO QUE YA TIENES) ================= -->
+<div class="site-header" role="banner">
+    <div class="header__inner-content">
+
+        <button class="mobile-menu menu-icon">
+            <div class="menu-icon-container">
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+
+        <div class="logo__wrapper">
+            <a href="index.html">VESTIGE</a>
+        </div>
+
+        <div class="main__nav">
+            <div class="left-nav nav__items">
+
+                <div class="nav__item">
+                    <button class="label">Shop</button>
+                </div>
+
+                <div class="nav__item"><a href="#">Stores</a></div>
+                <div class="nav__item"><a href="#">Stories</a></div>
+                <div class="nav__item"><a href="#">About</a></div>
             </div>
 
-            <!-- Navegación principal -->
-            <div class="main__nav">
-                <!-- Navegación izquierda -->
-                <div class="left-nav nav__items">
-                    <!-- Shop con dropdown -->
-                    <div class="nav__item">
-                        <button class="label">Shop</button>
-                        <div class="expandable-inner-content">
-                            <div class="mobile__nav">
-                                <div class="mobile__nav_item"><a href="shop.html?category=new">New</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html">All</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=shorts">Shorts</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=tees">Tees</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=accessories">Accessories</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=bottoms">Bottoms</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=denim">Denim</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=headwear">Headwear</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=outerwear">Outerwear</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=sweats">Sweats</a></div>
-                                <div class="mobile__nav_item"><a href="shop.html?category=tops">Tops</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Otras páginas -->
-                    <div class="nav__item"><a href="/stores">Stores</a></div>
-                    <div class="nav__item"><a href="/stories">Stories</a></div>
-                    <div class="nav__item"><a href="/about">About</a></div>
-
-                    <!-- Selector de país -->
-                    <div class="nav__item">
-                        <div class="country-selector-mobile">
-                            <button class="country-select-button">
-                                <span class="country-name">PE/PEN</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="4" viewBox="0 0 10 5" fill="none">
-                                    <path d="M1 1L5.12903 4L9 1" stroke="black"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carrito y país (desktop) -->
-                <div class="flex items-center ml-auto">
-                    <!-- País solo desktop -->
-                    <div class="hidden md:block">
-                        <button class="country-select-button">
-                            <span class="country-name">PE/PEN</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="4" viewBox="0 0 10 5" fill="none">
-                                <path d="M1 1L5.12903 4L9 1" stroke="black"></path>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Carrito -->
-                    <div>
-                        <div class="nav__item cart__item">
-                            <span>Cart</span> (0)
-                        </div>
-                    </div>
-                </div>
+            <div class="flex items-center ml-auto">
+                <div class="nav__item cart__item">Cart (0)</div>
             </div>
         </div>
-        
-        <!-- Underlay móvil -->
-        <div class="mobile-underlay"></div>
     </div>
 
-    <!-- Contenido principal -->
-    <main>
-        <!-- Filtros -->
-        <div class="filters">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="new">New</button>
-                <button class="filter-btn" data-filter="tees">Tees</button>
-                <button class="filter-btn" data-filter="hoodies">Hoodies</button>
-                <button class="filter-btn" data-filter="pants">Pants</button>
-                <button class="filter-btn" data-filter="accessories">Accessories</button>
-            </div>
-        </div>
+    <div class="mobile-underlay"></div>
+</div>
+<!-- ================= FIN HEADER ================= -->
 
-        <!-- Grid de productos -->
-        <div class="products-grid" id="productsGrid">
-            <!-- Aquí puedes agregar tus productos -->
-            <!-- Ejemplo de producto -->
-            <div class="product-card" data-category="new">
-                <div class="product-image">
-                    <!-- Tu imagen aquí -->
-                    <div class="loading-skeleton" style="width: 100%; height: 100%;"></div>
-                    <div class="product-tags">
-                        <span class="product-tag">NEW</span>
-                    </div>
-                </div>
+<!-- ================= SHOP ================= -->
+<main>
+    <section class="shop-section">
+        <div class="shop-grid">
+
+            <div class="product-card">
+                <img src="producto1.png" alt="">
                 <div class="product-info">
-                    <div class="product-title">Product Name</div>
-                    <div class="product-price">$120.00</div>
+                    <div class="product-name">Denim Jacket</div>
+                    <div class="product-price">S/ 420.00</div>
                 </div>
             </div>
-            
-            <!-- Agrega más productos según necesites -->
-        </div>
 
-        <!-- Paginación -->
-        <div class="pagination">
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">→</button>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Help</h3>
-                    <div class="footer-links">
-                        <a href="/contact">Contact</a>
-                        <a href="/shipping">Shipping</a>
-                        <a href="/returns">Returns</a>
-                        <a href="/faq">FAQ</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <div class="footer-links">
-                        <a href="/about">About</a>
-                        <a href="/stores">Stores</a>
-                        <a href="/careers">Careers</a>
-                        <a href="/press">Press</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <div class="footer-links">
-                        <a href="/terms">Terms</a>
-                        <a href="/privacy">Privacy</a>
-                        <a href="/cookies">Cookies</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow</h3>
-                    <div class="footer-links">
-                        <a href="https://instagram.com" target="_blank">Instagram</a>
-                        <a href="https://twitter.com" target="_blank">Twitter</a>
-                        <a href="https://facebook.com" target="_blank">Facebook</a>
-                    </div>
+            <div class="product-card">
+                <img src="producto2.png" alt="">
+                <div class="product-info">
+                    <div class="product-name">Graphic Tee</div>
+                    <div class="product-price">S/ 160.00</div>
                 </div>
             </div>
-            <div class="copyright">
-                © 2023 VESTIGE. All rights reserved.
+
+            <div class="product-card">
+                <img src="producto3.png" alt="">
+                <div class="product-info">
+                    <div class="product-name">Cargo Pants</div>
+                    <div class="product-price">S/ 310.00</div>
+                </div>
             </div>
+
+            <div class="product-card">
+                <img src="producto4.png" alt="">
+                <div class="product-info">
+                    <div class="product-name">Cap Logo</div>
+                    <div class="product-price">S/ 120.00</div>
+                </div>
+            </div>
+
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script>
-        // Toggle menú móvil
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const body = document.body;
-        const mobileUnderlay = document.querySelector('.mobile-underlay');
-
-        mobileMenu.addEventListener('click', () => {
-            body.classList.toggle('mobile-open');
-        });
-
-        mobileUnderlay.addEventListener('click', () => {
-            body.classList.remove('mobile-open');
-        });
-
-        // Toggle dropdown de Shop
-        const shopButton = document.querySelector('.nav__item .label');
-        const shopDropdown = document.querySelector('.expandable-inner-content');
-        let dropdownOpen = false;
-
-        shopButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdownOpen = !dropdownOpen;
-            shopDropdown.style.display = dropdownOpen ? 'block' : 'none';
-        });
-
-        // Cerrar dropdown al hacer click fuera
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav__item')) {
-                shopDropdown.style.display = 'none';
-                dropdownOpen = false;
-            }
-        });
-
-        // Filtros de productos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const productCards = document.querySelectorAll('.product-card');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remover active de todos
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Agregar active al clickeado
-                button.classList.add('active');
-                
-                const filter = button.getAttribute('data-filter');
-                
-                // Filtrar productos
-                productCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Paginación
-        const pageButtons = document.querySelectorAll('.page-btn');
-        pageButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (!button.classList.contains('active')) {
-                    pageButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    // Aquí cargarías la página correspondiente
-                }
-            });
-        });
-
-        // Selector de país
-        const countryButtons = document.querySelectorAll('.country-select-button');
-        countryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                alert('Selector de país - Cambia entre Perú y otros países');
-            });
-        });
-
-        // Carrito
-        const cartButton = document.querySelector('.cart__item');
-        cartButton.addEventListener('click', () => {
-            alert('Carrito - Muestra los productos agregados');
-        });
-
-        // Cerrar menú móvil al hacer clic en un link
-        const mobileLinks = document.querySelectorAll('.left-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                body.classList.remove('mobile-open');
-            });
-        });
-    </script>
+<!-- JS -->
+<script src="shop.js"></script>
 </body>
 </html>
