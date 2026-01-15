@@ -20,7 +20,7 @@ const hoodiesData = {
         titulo: 'vestige star one',
         nombre: 'star pink c1',
         descripcion: 'el primer conjunto de vestige beta. Solo 75 unidades.',
-        imagen: 'conjuntoprincipal.png'
+        imagen: 'conjuntoprincipal1.jpg'
     },
     'hoodie3': {
         titulo: 'Hoodie Red Signature',
