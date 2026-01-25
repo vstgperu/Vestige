@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DENIM TEARS | Prendas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="prendas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&family=Helvetica+Neue:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body class="prendas-page">
-    <!-- MISMA BARRA -->
+    <!-- BARRA SUPERIOR FIJA -->
     <header class="denim-header">
         <div class="header-container">
+            <!-- Hamburguesa -->
             <div class="hamburger" id="hamburgerBtn">
                 <div class="line"></div>
                 <div class="line"></div>
@@ -19,6 +21,7 @@
                 <span class="menu-label">MENU</span>
             </div>
 
+            <!-- Logo -->
             <div class="logo">
                 <a href="index.html" class="logo-link">
                     <div class="logo-top">DENIM</div>
@@ -26,6 +29,7 @@
                 </a>
             </div>
 
+            <!-- Iconos -->
             <div class="header-icons">
                 <div class="cart-icon" id="cartBtn">
                     <i class="fas fa-shopping-bag"></i>
@@ -35,7 +39,7 @@
         </div>
     </header>
 
-    <!-- MISMO MENÚ LATERAL -->
+    <!-- MENÚ LATERAL -->
     <nav class="side-menu" id="sideMenu">
         <div class="menu-header">
             <div class="menu-logo">DENIM TEARS</div>
@@ -68,13 +72,79 @@
 
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- CONTENIDO VACÍO POR AHORA -->
-    <main class="page-content">
-        <h1>PRENDAS</h1>
-        <p>Página de productos - Próximamente</p>
-        <a href="index.html" class="back-link">← Volver al Inicio</a>
+    <!-- CONTENIDO PRINCIPAL PRENDAS -->
+    <main class="prendas-main">
+        <div class="prendas-container">
+            <!-- Título -->
+            <div class="prendas-header">
+                <h1>COLECCIÓN ANÓNIMO</h1>
+                <p class="prendas-subtitle">EDICIÓN LIMITADA</p>
+            </div>
+
+            <!-- Grid de prendas (2 por fila en móvil) -->
+            <div class="prendas-grid" id="prendasGrid">
+                <!-- Prenda 1 -->
+                <div class="prenda-card" data-id="1">
+                    <div class="prenda-img-container">
+                        <img src="assets/prenda1.png" alt="ANÓNIMO 01" class="prenda-img">
+                        <div class="prenda-overlay">
+                            <button class="ver-detalle-btn">VER DETALLE</button>
+                        </div>
+                    </div>
+                    <div class="prenda-info">
+                        <h3 class="prenda-nombre">ANÓNIMO 01</h3>
+                        <p class="prenda-precio">$245.00 USD</p>
+                        <div class="prenda-etiquetas">
+                            <span class="etiqueta">LIMITED</span>
+                            <span class="etiqueta">UNISEX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prenda 2 -->
+                <div class="prenda-card" data-id="2">
+                    <div class="prenda-img-container">
+                        <img src="assets/prenda2.png" alt="ANÓNIMO 02" class="prenda-img">
+                        <div class="prenda-overlay">
+                            <button class="ver-detalle-btn">VER DETALLE</button>
+                        </div>
+                    </div>
+                    <div class="prenda-info">
+                        <h3 class="prenda-nombre">ANÓNIMO 02</h3>
+                        <p class="prenda-precio">$198.00 USD</p>
+                        <div class="prenda-etiquetas">
+                            <span class="etiqueta">LIMITED</span>
+                            <span class="etiqueta">COTTON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Más espacios para futuras prendas -->
+                <div class="prenda-placeholder">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <p>MÁS PRENDAS PRÓXIMAMENTE</p>
+                </div>
+            </div>
+        </div>
     </main>
 
+    <!-- MODAL DETALLE DE PRENDA -->
+    <div class="detalle-modal" id="detalleModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido dinámico se carga aquí -->
+            </div>
+        </div>
+        <div class="modal-overlay" id="modalOverlay"></div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="prendas.js"></script>
 </body>
 </html>
