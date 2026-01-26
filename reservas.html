@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DENIM TEARS | Reservas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reservas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&family=Helvetica+Neue:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body class="reservas-page">
-    <!-- MISMA BARRA -->
+    <!-- BARRA SUPERIOR FIJA -->
     <header class="denim-header">
         <div class="header-container">
+            <!-- Hamburguesa -->
             <div class="hamburger" id="hamburgerBtn">
                 <div class="line"></div>
                 <div class="line"></div>
@@ -19,6 +21,7 @@
                 <span class="menu-label">MENU</span>
             </div>
 
+            <!-- Logo -->
             <div class="logo">
                 <a href="index.html" class="logo-link">
                     <div class="logo-top">DENIM</div>
@@ -26,6 +29,7 @@
                 </a>
             </div>
 
+            <!-- Iconos -->
             <div class="header-icons">
                 <div class="cart-icon" id="cartBtn">
                     <i class="fas fa-shopping-bag"></i>
@@ -35,7 +39,7 @@
         </div>
     </header>
 
-    <!-- MISMO MENÚ LATERAL -->
+    <!-- MENÚ LATERAL -->
     <nav class="side-menu" id="sideMenu">
         <div class="menu-header">
             <div class="menu-logo">DENIM TEARS</div>
@@ -68,13 +72,134 @@
 
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- CONTENIDO VACÍO POR AHORA -->
-    <main class="page-content">
-        <h1>RESERVAS</h1>
-        <p>Página de reservas - Próximamente</p>
-        <a href="index.html" class="back-link">← Volver al Inicio</a>
+    <!-- CONTENIDO PRINCIPAL RESERVAS -->
+    <main class="reservas-main">
+        <div class="reservas-container">
+            <!-- Encabezado -->
+            <div class="reservas-header">
+                <h1>LISTA DE ESPERA</h1>
+                <p class="reservas-subtitle">EDICIONES LIMITADAS</p>
+            </div>
+
+            <!-- Información de la prenda (si viene de reservar) -->
+            <div class="prenda-reservada" id="prendaReservada">
+                <!-- Se llena con JavaScript -->
+            </div>
+
+            <!-- Formulario de correo -->
+            <div class="reserva-form-container">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h2>NO TE PIERDAS LOS NUEVOS DROPS</h2>
+                    <p class="form-description">
+                        Ingresa tu correo para ser el primero en enterarte cuando la prenda esté disponible 
+                        y recibir información exclusiva sobre nuevos lanzamientos.
+                    </p>
+                </div>
+
+                <form class="reserva-form" id="reservaForm">
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input 
+                            type="email" 
+                            id="emailInput"
+                            class="email-input"
+                            placeholder="tuemail@ejemplo.com"
+                            required
+                            autocomplete="off"
+                        >
+                        <div class="input-line"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">AGREGARME A LA LISTA</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        
+                        <p class="form-note">
+                            Al ingresar tu correo, también lo enviaremos por WhatsApp para confirmación inmediata.
+                        </p>
+                    </div>
+                </form>
+
+                <!-- WhatsApp Directo -->
+                <div class="whatsapp-direct">
+                    <div class="whatsapp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <p>¿Prefieres contactarnos directamente?</p>
+                    <a href="https://wa.me/51994327093?text=Hola%20Denim%20Tears,%20quiero%20información%20sobre%20las%20prendas" 
+                       class="whatsapp-btn" 
+                       target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        CHATEAR POR WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+            <!-- Beneficios -->
+            <div class="beneficios-container">
+                <h3>BENEFICIOS DE UNIRTE</h3>
+                <div class="beneficios-grid">
+                    <div class="beneficio">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h4>PRIMERAS NOTIFICACIONES</h4>
+                        <p>Recibe alertas 24 horas antes del lanzamiento público.</p>
+                    </div>
+                    
+                    <div class="beneficio">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h4>ACCESO ANTICIPADO</h4>
+                        <p>Comprar antes que se agoten las ediciones limitadas.</p>
+                    </div>
+                    
+                    <div class="beneficio">
+                        <div class="beneficio-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>CONTENIDO EXCLUSIVO</h4>
+                        <p>Detrás de cámaras, procesos creativos y más.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡CORREO AGREGADO!</h2>
+            <p class="confirmation-text" id="confirmationText">
+                Te hemos agregado a la lista de espera exitosamente.
+            </p>
+            <div class="whatsapp-info">
+                <i class="fab fa-whatsapp"></i>
+                <p>El correo también ha sido enviado por WhatsApp.</p>
+            </div>
+            <div class="confirmation-actions">
+                <button class="close-confirmation" id="closeConfirmationBtn">
+                    CONTINUAR
+                </button>
+                <a href="https://wa.me/51994327093" class="whatsapp-confirm" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    ABRIR WHATSAPP
+                </a>
+            </div>
+        </div>
+        <div class="confirmation-overlay" id="confirmationOverlay"></div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="reservas.js"></script>
 </body>
 </html>
