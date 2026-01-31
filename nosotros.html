@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DENIM TEARS | Nosotros</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="nosotros.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&family=Helvetica+Neue:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="nosotros-page">
+    <!-- BARRA SUPERIOR FIJA -->
+    <header class="denim-header">
+        <div class="header-container">
+            <!-- Hamburguesa -->
+            <div class="hamburger" id="hamburgerBtn">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line short"></div>
+                <span class="menu-label">MENU</span>
+            </div>
+
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-top">DENIM</div>
+                    <div class="logo-bottom">TEARS</div>
+                </a>
+            </div>
+
+            <!-- Iconos -->
+            <div class="header-icons">
+                <div class="cart-icon" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENÚ LATERAL -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <div class="menu-logo">DENIM TEARS</div>
+            <button class="close-menu" id="closeMenuBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="menu-items">
+            <a href="index.html" class="menu-item">
+                <span>INICIO</span>
+                <i class="fas fa-home"></i>
+            </a>
+            
+            <a href="prendas.html" class="menu-item">
+                <span>PRENDAS</span>
+                <i class="fas fa-tshirt"></i>
+            </a>
+            
+            <a href="reservas.html" class="menu-item">
+                <span>RESERVAS</span>
+                <i class="fas fa-calendar-alt"></i>
+            </a>
+            
+            <a href="nosotros.html" class="menu-item active">
+                <span>NOSOTROS</span>
+                <i class="fas fa-users"></i>
+            </a>
+        </div>
+        
+        <div class="menu-footer">
+            <p>© 2024 DENIM TEARS</p>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- HERO SECTION -->
+    <section class="nosotros-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>MÁS QUE ROPA</h1>
+            <p class="hero-subtitle">UNA NARRATIVA CULTURAL</p>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="nosotros-main">
+        <!-- NUESTRA HISTORIA -->
+        <section class="historia-section">
+            <div class="container">
+                <div class="historia-content">
+                    <div class="historia-text">
+                        <h2>NUESTRA HISTORIA</h2>
+                        <div class="historia-line"></div>
+                        <p class="historia-intro">
+                            Denim Tears nace como una respuesta a la necesidad de contar historias a través de la indumentaria. 
+                            Fundada en Los Ángeles por Tremaine Emory, nuestra marca explora las complejidades de la identidad, 
+                            la historia y la cultura a través de símbolos y narrativas tejidas en cada prenda.
+                        </p>
+                        <p>
+                            Cada diseño es una conversación, cada colección es un capítulo. Nos especializamos en 
+                            ediciones limitadas que desafían las convenciones y celebran la individualidad.
+                        </p>
+                        <div class="mision-vision">
+                            <div class="mision">
+                                <h3><i class="fas fa-bullseye"></i> MISIÓN</h3>
+                                <p>Crear prendas que sirvan como lienzo para la expresión cultural y la conversación social.</p>
+                            </div>
+                            <div class="vision">
+                                <h3><i class="fas fa-eye"></i> VISIÓN</h3>
+                                <p>Revolucionar la moda como medio de documentación histórica y cambio cultural.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="historia-imagen">
+                        <!-- Imagen representativa -->
+                        <div class="imagen-container">
+                            <div class="imagen-border"></div>
+                            <div class="imagen-inner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERÍA DE MODELOS -->
+        <section class="galeria-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>COLECCIÓN ANÓNIMO</h2>
+                    <p>Modelos vistiendo nuestras piezas en ubicaciones icónicas</p>
+                </div>
+                
+                <div class="galeria-grid">
+                    <!-- Modelo 1 -->
+                    <div class="modelo-card">
+                        <div class="modelo-img modelo-1"></div>
+                        <div class="modelo-info">
+                            <h4>MODELO 01</h4>
+                            <p>ANÓNIMO 01 Collection</p>
+                            <span class="modelo-location">Los Angeles, CA</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Modelo 2 -->
+                    <div class="modelo-card">
+                        <div class="modelo-img modelo-2"></div>
+                        <div class="modelo-info">
+                            <h4>MODELO 02</h4>
+                            <p>ANÓNIMO 02 Collection</p>
+                            <span class="modelo-location">Brooklyn, NY</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Modelo 3 -->
+                    <div class="modelo-card">
+                        <div class="modelo-img modelo-3"></div>
+                        <div class="modelo-info">
+                            <h4>MODELO 03</h4>
+                            <p>Limited Edition Drop</p>
+                            <span class="modelo-location">Tokyo, JP</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Modelo 4 -->
+                    <div class="modelo-card">
+                        <div class="modelo-img modelo-4"></div>
+                        <div class="modelo-info">
+                            <h4>MODELO 04</h4>
+                            <p>Cotton Wreath Series</p>
+                            <span class="modelo-location">London, UK</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="galeria-controls">
+                    <button class="galeria-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="galeria-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="galeria-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESEÑAS Y TESTIMONIOS -->
+        <section class="reseñas-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>LO QUE DICEN</h2>
+                    <p>Testimonios de nuestra comunidad</p>
+                </div>
+                
+                <div class="reseñas-grid">
+                    <!-- Reseña 1 -->
+                    <div class="reseña-card">
+                        <div class="reseña-header">
+                            <div class="reseña-avatar avatar-1"></div>
+                            <div class="reseña-info">
+                                <h4>ALEX R.</h4>
+                                <div class="reseña-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="reseña-text">
+                            "La calidad excepcional y el significado detrás de cada pieza hacen que Denim Tears sea más que una marca. Es arte portátil."
+                        </p>
+                        <span class="reseña-producto">ANÓNIMO 01 Hoodie</span>
+                    </div>
+                    
+                    <!-- Reseña 2 -->
+                    <div class="reseña-card">
+                        <div class="reseña-header">
+                            <div class="reseña-avatar avatar-2"></div>
+                            <div class="reseña-info">
+                                <h4>MARÍA G.</h4>
+                                <div class="reseña-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="reseña-text">
+                            "Cada vez que uso mis piezas de Denim Tears, inicio conversaciones. La narrativa cultural es palpable."
+                        </p>
+                        <span class="reseña-producto">ANÓNIMO 02 Tee</span>
+                    </div>
+                    
+                    <!-- Reseña 3 -->
+                    <div class="reseña-card">
+                        <div class="reseña-header">
+                            <div class="reseña-avatar avatar-3"></div>
+                            <div class="reseña-info">
+                                <h4>KEVIN T.</h4>
+                                <div class="reseña-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="reseña-text">
+                            "La atención al detalle y las ediciones limitadas hacen que cada compra se sienta exclusiva y especial."
+                        </p>
+                        <span class="reseña-producto">Cotton Collection</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO Y REDES -->
+        <section class="contacto-section">
+            <div class="container">
+                <div class="contacto-grid">
+                    <!-- Información de contacto -->
+                    <div class="contacto-info">
+                        <h2>CONECTA CON NOSOTROS</h2>
+                        <div class="contacto-line"></div>
+                        
+                        <div class="contacto-details">
+                            <div class="contacto-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>EMAIL</h4>
+                                    <p>contacto@denimtears.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contacto-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>UBICACIÓN</h4>
+                                    <p>Los Angeles, California</p>
+                                    <p>Estados Unidos</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contacto-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>TELÉFONO</h4>
+                                    <p>+1 (310) 555-7890</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Horario -->
+                        <div class="horario">
+                            <h4><i class="fas fa-clock"></i> HORARIO DE ATENCIÓN</h4>
+                            <p>Lunes a Viernes: 9:00 AM - 6:00 PM PST</p>
+                            <p>Sábado: 10:00 AM - 4:00 PM PST</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Redes Sociales -->
+                    <div class="redes-sociales">
+                        <h2>SÍGUENOS</h2>
+                        <div class="contacto-line"></div>
+                        
+                        <p class="redes-text">
+                            Mantente al día con nuestros últimos lanzamientos, behind-the-scenes y contenido exclusivo.
+                        </p>
+                        
+                        <div class="redes-grid">
+                            <a href="#" class="redes-btn instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                                <span class="redes-followers">@denimtears</span>
+                            </a>
+                            
+                            <a href="#" class="redes-btn twitter">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                                <span class="redes-followers">@denimtears</span>
+                            </a>
+                            
+                            <a href="#" class="redes-btn tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                                <span class="redes-followers">@denim.tears</span>
+                            </a>
+                            
+                            <a href="#" class="redes-btn youtube">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                                <span class="redes-followers">Denim Tears</span>
+                            </a>
+                        </div>
+                        
+                        <!-- Newsletter -->
+                        <div class="newsletter">
+                            <h4><i class="fas fa-paper-plane"></i> NEWSLETTER</h4>
+                            <p>Suscríbete para recibir contenido exclusivo antes que nadie.</p>
+                            <a href="reservas.html" class="newsletter-btn">
+                                SUSCRIBIRME
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="nosotros-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">DENIM TEARS</div>
+                <p class="footer-text">NARRATIVA A TRAVÉS DE LA INDUMENTARIA</p>
+                
+                <div class="footer-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="prendas.html">Prendas</a>
+                    <a href="reservas.html">Reservas</a>
+                    <a href="nosotros.html">Nosotros</a>
+                </div>
+                
+                <p class="footer-copy">© 2024 DENIM TEARS. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="nosotros.js"></script>
+</body>
+  </html>
