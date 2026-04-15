@@ -85,9 +85,6 @@ function mostrarDetallePrenda(prendaId) {
                 <button class="reservar-btn" id="reservarBtn">
                     RESERVAR ESTA PRENDA
                 </button>
-                <button class="agregar-carrito-btn" id="agregarCarritoBtn">
-                    AGREGAR AL CARRITO
-                </button>
             </div>
         </div>
     `;
