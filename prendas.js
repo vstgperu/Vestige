@@ -158,67 +158,14 @@ function inicializarEventosModal() {
         });
     }
     
-    // Botón agregar al carrito
-    const agregarCarritoBtn = document.getElementById('agregarCarritoBtn');
-    if (agregarCarritoBtn) {
-        agregarCarritoBtn.addEventListener('click', function() {
-            if (!tallaSeleccionada) {
-                tallaMensaje.textContent = 'Por favor selecciona una talla';
-                tallaMensaje.style.color = '#d00';
-                return;
-            }
-            
-            // Obtener carrito actual
-            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            
-            // Agregar nueva prenda
-            const prenda = prendasData[prendaActualId];
-            carrito.push({
-                id: prendaActualId,
-                nombre: prenda.nombre,
-                precio: prenda.precio,
-                talla: tallaSeleccionada,
-                imagen: prenda.imagen
-            });
-            
-            // Guardar carrito
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            
-            // Actualizar contador
-            actualizarContadorCarrito();
-            
-            // Feedback al usuario
-            alert(`${prenda.nombre} (Talla: ${tallaSeleccionada}) agregado al carrito`);
-            cerrarModal();
-        });
-    }
 }
 
-// Actualizar contador del carrito
-function actualizarContadorCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const cartCount = document.querySelector('.cart-count');
-    
-    if (cartCount) {
-        cartCount.textContent = carrito.length;
-        
-        // Efecto visual
-        const cartBtn = document.getElementById('cartBtn');
-        if (cartBtn) {
-            cartBtn.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                cartBtn.style.transform = 'scale(1)';
-            }, 200);
-        }
-    }
-}
+
 
 // INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Página de prendas cargada');
     
-    // Actualizar contador del carrito al cargar
-    actualizarContadorCarrito();
     
     // Eventos para las tarjetas de prendas
     const prendaCards = document.querySelectorAll('.prenda-card');
